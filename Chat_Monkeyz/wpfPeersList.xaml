@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Chat_Monkeyz.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:Chat_Monkeyz"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="200">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BackgroundColor" />
+        <Style x:Key="DisabledStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsIgnored}" Value="False">
+                    <Setter Property="Foreground" Value="Black"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsIgnored}" Value="True">
+                    <Setter Property="Foreground" Value="Gray"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ColoringStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsEncrypted}" Value="False">
+                    <Setter Property="Foreground" Value="Red"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsEncrypted}" Value="True">
+                    <Setter Property="Foreground" Value="Green"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <ListBox Name="listPeers" Background="{DynamicResource BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding Pseudo}" FontSize="16" Style="{StaticResource DisabledStyle}" />
+                        <TextBlock Grid.Column="1" Text="•" Style="{StaticResource ColoringStyle}" FontSize="30" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>
+
